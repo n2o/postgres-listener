@@ -1,6 +1,7 @@
 # postgres-listener
 
 [![Clojars Project](https://img.shields.io/clojars/v/n2o/postgres-listener.svg)](https://clojars.org/n2o/postgres-listener)
+[![Build Status](https://travis-ci.org/n2o/postgres-listener.svg?branch=master)](https://travis-ci.org/n2o/postgres-listener)
 
 Connect to a postgres-database and wait for a NOTIFY of the database. This
 notify-event triggers a function, which receives the payload as EDN if the
