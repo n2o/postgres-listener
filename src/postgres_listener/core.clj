@@ -12,8 +12,8 @@
 ;; Auxiliary Functions
 
 (defn- json->edn
-  "Try to parse payload. Return EDN if payload is json. Else returns
-   string-representation."
+  "Try to parse payload. Return EDN if payload is json. Else return
+   string as provided by postgres."
   [payload]
   (try
     (keywordize-keys (json/read-str payload))
@@ -67,27 +67,4 @@
 (comment
   (connect {:host "localhost" :port 5432 :database "discussion" :user "postgres" :password "postgres"})
   (arm-listener (fn [payload] (println payload)) "new_event")
-  )
-
-
-;; -----------------------------------------------------------------------------
-;; Testing
-
-(comment
-  (require '[korma.core :refer :all]
-           '[korma.db :refer :all])
-
-  (defdb pg (postgres
-             {:host "localhost"
-              :port "5432"
-              :db "discussion"
-              :user "postgres"
-              :password "postgres"
-              :delimiters ""}))
-
-  (defentity issues
-    (entity-fields :uid :title :slug :info))
-
-  (select issues)
-  (insert issues (values {:title "foo" :info "bar" :long_info "foo" :slug (-> (rand-int 999999) str) :is_disabled false}))
   )
