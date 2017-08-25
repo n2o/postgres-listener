@@ -70,25 +70,21 @@
 ;; -----------------------------------------------------------------------------
 ;; Testing
 
-(require '[korma.core :refer :all]
-         '[korma.db :refer :all])
+(comment
+  (require '[korma.core :refer :all]
+           '[korma.db :refer :all])
 
-(defdb pg (postgres
-           {:host "localhost"
-            :port "5432"
-            :db "discussion"
-            :user "postgres"
-            :password "postgres"
-            :delimiters ""}))
+  (defdb pg (postgres
+             {:host "localhost"
+              :port "5432"
+              :db "discussion"
+              :user "postgres"
+              :password "postgres"
+              :delimiters ""}))
 
-(defentity issues
-  (entity-fields :uid :title :slug :info))
+  (defentity issues
+    (entity-fields :uid :title :slug :info))
 
-(select issues)
-(insert issues (values {:title "foo" :info "bar" :long_info "foo" :slug (-> (rand-int 999999) str) :is_disabled false}))
-
-(rand-int 100)
-
-(-> (new java.util.HashMap)
-  (.put "a" 1)
-  (println))
+  (select issues)
+  (insert issues (values {:title "foo" :info "bar" :long_info "foo" :slug (-> (rand-int 999999) str) :is_disabled false}))
+  )
