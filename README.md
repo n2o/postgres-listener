@@ -28,35 +28,30 @@ A trigger for a table 'events' can be configured like this:
     FOR EACH ROW
     EXECUTE PROCEDURE PUBLIC.NOTIFY();
 
-## Installation
-
-Download latest version from Clojars.
-
 ## Usage
 
-FIXME: explanation
+Require latest version of postgres-listener in your project.clj (check latest
+version in the badge as this string is very likely to be forgotten on new
+releases):
 
-    $ java -jar ai-connector-0.1.0-standalone.jar [args]
+```clojure
+:dependencies [[de.hhu.cn/postgres-listener "0.1.0"]
+```
 
-## Options
+You can then use it in your code to connect to the database, which provides the
+NOTIFY channel and add a listener to the corresponding LISTEN event. If your
+table is configured as shown above, you can react to the trigger `new_event`
+like this:
 
-FIXME: listing of options this app accepts.
+```clojure
+(require '[postgres-listener.core :as pgl])
 
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+(pgl/connect {:host "localhost" :port 5432 :database "postgres" :user "postgres" :password "postgres"})
+(pgl/arm-listener (fn [payload] (println payload)) "new_event")
+```
 
 ## License
 
-Copyright © 2017 FIXME
+Copyright © 2017 Christian Meter
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Distributed under the [MIT license](https://choosealicense.com/licenses/mit/).
