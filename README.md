@@ -31,7 +31,6 @@ A trigger for a table 'events' can be configured like this:
 ## Installation
 
 Download latest version from Clojars.
-Download from http://example.com/FIXME.
 
 ## Usage
 

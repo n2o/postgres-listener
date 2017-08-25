@@ -35,7 +35,10 @@
      (f (json->edn payload)))))
 
 (defn- connection
-  "Establishes connection to database. datasource needs to be defined."
+  "Establishes connection to database. datasource needs to be defined.
+
+  For example:
+  (connect {:host \"localhost\" :port 5432 :database \"postgres\" :user \"postgres\" :password \"postgres\"})"
   [f]
   (doto (.getConnection @datasource)
     (.addNotificationListener (make-listener f))))

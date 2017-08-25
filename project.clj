@@ -1,6 +1,6 @@
-(defproject postgres-listener "0.1.0"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+(defproject de.hhu.cn/postgres-listener "0.1.0"
+  :description "Connect to a postgres-database and wait for a NOTIFY event to trigger a function"
+  :url "https://github.com/n2o/postgres-listener"
   :license {:name "MIT"
             :url "https://choosealicense.com/licenses/mit/"}
   :dependencies [[org.clojure/clojure "1.9.0-alpha17"]
