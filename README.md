@@ -10,7 +10,7 @@ payload was initially encoded as JSON (for example with postgres' function
 
 A trigger for a table 'events' can be configured like this:
 
-    // language: PLpgSQL
+    -- language: PLpgSQL
     -- Define function for notify-event
     CREATE OR REPLACE FUNCTION PUBLIC.NOTIFY() RETURNS trigger AS
     $BODY$
