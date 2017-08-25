@@ -41,15 +41,16 @@
     (.addNotificationListener (make-listener f))))
 
 (defn arm-listener
-  "Creates listener for new events in the eventstore. f needs to be a function,
-  which gets one parameter, which is the (transformed) payload published by
-  postgres' trigger.
+  "Creates listener for new events in the eventstore. f/1 needs to be a
+  function, which gets one parameter, which is the (transformed) payload
+  published by postgres' trigger. And the event must match with the name
+  of the trigger, e.g. \"new_event\".
 
   For example:
-  (arm-listener (fn [payload] (println payload)) \"LISTEN new_event;\")"
+  (arm-listener (fn [payload] (println payload)) \"new_event\")"
   [f event]
   (doto (.createStatement (connection f))
-    (.execute event)
+    (.execute (format "LISTEN %s;" event))
     (.close)))
 
 (defn connect [{:keys [host port database user password]}]
@@ -63,7 +64,7 @@
 
 (comment
   (connect {:host "localhost" :port 5432 :database "discussion" :user "postgres" :password "postgres"})
-  (arm-listener (fn [payload] (println payload)) "LISTEN new_event;")
+  (arm-listener (fn [payload] (println payload)) "new_event")
   )
 
 
