@@ -6,8 +6,7 @@
   (:require [clojure.data.json :as json]
             [clojure.walk :refer [keywordize-keys]])
   (:import [com.impossibl.postgres.jdbc PGDataSource]
-           [com.impossibl.postgres.api.jdbc PGNotificationListener])
-  (:gen-class))
+           [com.impossibl.postgres.api.jdbc PGNotificationListener]))
 
 ;; -----------------------------------------------------------------------------
 ;; Auxiliary Functions
