@@ -44,7 +44,7 @@
     (doto (.getConnection @datasource)
       (.addNotificationListener (make-listener f)))
     (catch Exception e
-      (log/error "No connection to database."))))
+      (log/error "No connection to database: " e))))
 
 (defn arm-listener
   "Creates listener for new events in the eventstore. f/1 needs to be a
@@ -57,7 +57,7 @@
   [f event]
   (doto (.createStatement (connection f))
     (.execute (format "LISTEN %s;" event))
-    (.close)))
+    #_(.close)))
 
 (defn connect [{:keys [host port database user password]}]
   (reset! datasource (doto (PGDataSource.)
