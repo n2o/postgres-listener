@@ -4,7 +4,8 @@
   payload was initially encoded as JSON (for example with postgres' function
   \"row_to_json()\"."
   (:require [clojure.data.json :as json]
-            [clojure.walk :refer [keywordize-keys]])
+            [clojure.walk :refer [keywordize-keys]]
+            [taoensso.timbre :as log])
   (:import [com.impossibl.postgres.jdbc PGDataSource]
            [com.impossibl.postgres.api.jdbc PGNotificationListener]))
 
@@ -39,8 +40,11 @@
   For example:
   (connect {:host \"localhost\" :port 5432 :database \"postgres\" :user \"postgres\" :password \"postgres\"})"
   [f]
-  (doto (.getConnection @datasource)
-    (.addNotificationListener (make-listener f))))
+  (try
+    (doto (.getConnection @datasource)
+      (.addNotificationListener (make-listener f)))
+    (catch Exception e
+      (log/error "No connection to database."))))
 
 (defn arm-listener
   "Creates listener for new events in the eventstore. f/1 needs to be a
@@ -64,7 +68,14 @@
                        (.setPassword password))))
 
 
+(defn update-issues [payload]
+  (println "New issue!" payload))
+(defn update-textversion [payload]
+  (println "New textversion!" payload))
+
 (comment
-  (connect {:host "localhost" :port 5432 :database "discussion" :user "postgres" :password "postgres"})
-  (arm-listener (fn [payload] (println payload)) "new_event")
+  (connect {:host "localhost" :port 5432 :database "discussion" :user "postgres" :password "DXxCNtfnt!MOo!f8LY1!P%sw3KGzt@s!"})
+  (arm-listener (fn [payload] (println payload)) "statements_changes")
+  (arm-listener update-issues "issues_changes")
+  (arm-listener update-textversion "textversions_changes")
   )
