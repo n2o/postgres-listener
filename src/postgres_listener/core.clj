@@ -57,7 +57,7 @@
   [f event]
   (doto (.createStatement (connection f))
     (.execute (format "LISTEN %s;" event))
-    #_(.close)))
+    (.close)))
 
 (defn connect [{:keys [host port database user password]}]
   (reset! datasource (doto (PGDataSource.)
@@ -67,13 +67,12 @@
                        (.setUser user)
                        (.setPassword password))))
 
-
-(defn update-issues [payload]
-  (println "New issue!" payload))
-(defn update-textversion [payload]
-  (println "New textversion!" payload))
-
 (comment
+  (defn update-issues [payload]
+    (println "New issue!" payload))
+  (defn update-textversion [payload]
+    (println "New textversion!" payload))
+
   (connect {:host "localhost" :port 5432 :database "discussion" :user "postgres" :password "DXxCNtfnt!MOo!f8LY1!P%sw3KGzt@s!"})
   (arm-listener (fn [payload] (println payload)) "statements_changes")
   (arm-listener update-issues "issues_changes")
