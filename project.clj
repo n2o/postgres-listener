@@ -1,4 +1,4 @@
-(defproject de.hhu.cn/postgres-listener "0.1.2-SNAPSHOT"
+(defproject de.hhu.cn/postgres-listener "0.1.2"
   :description "Connect to a postgres-database and wait for a NOTIFY event to trigger a function"
   :url "https://github.com/n2o/postgres-listener"
   :license {:name "MIT"
