@@ -35,7 +35,7 @@ version in the badge as this string is very likely to be forgotten on new
 releases):
 
 ```clojure
-:dependencies [[de.hhu.cn/postgres-listener "0.1.1"]]
+:dependencies [[de.hhu.cn/postgres-listener "0.1.2"]]
 ```
 
 You can then use it in your code to connect to the database, which provides the
