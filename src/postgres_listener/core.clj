@@ -66,15 +66,3 @@
                        (.setDatabase database)
                        (.setUser user)
                        (.setPassword password))))
-
-(comment
-  (defn update-issues [payload]
-    (println "New issue!" payload))
-  (defn update-textversion [payload]
-    (println "New textversion!" payload))
-
-  (connect {:host "localhost" :port 5432 :database "discussion" :user "postgres" :password "DXxCNtfnt!MOo!f8LY1!P%sw3KGzt@s!"})
-  (arm-listener (fn [payload] (println payload)) "statements_changes")
-  (arm-listener update-issues "issues_changes")
-  (arm-listener update-textversion "textversions_changes")
-  )
