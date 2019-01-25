@@ -57,7 +57,7 @@
   [f event]
   (doto (.createStatement (connection f))
     (.execute (format "LISTEN %s;" event))
-    (.close)))
+    (.closeOnCompletion)))
 
 (defn connect [{:keys [host port database user password]}]
   (reset! datasource (doto (PGDataSource.)
