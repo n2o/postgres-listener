@@ -63,6 +63,6 @@
   (reset! datasource (doto (PGDataSource.)
                        (.setHost host)
                        (.setPort port)
-                       (.setDatabase database)
+                       (.setDatabaseName database)
                        (.setUser user)
                        (.setPassword password))))
