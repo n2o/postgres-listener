@@ -35,7 +35,7 @@ version in the badge as this string is very likely to be forgotten on new
 releases):
 
 ```clojure
-:dependencies [[de.hhu.cn/postgres-listener "0.1.2"]]
+:dependencies [[de.hhu.cn/postgres-listener "0.2.1"]]
 ```
 
 You can then use it in your code to connect to the database, which provides the
@@ -52,6 +52,6 @@ like this:
 
 ## License
 
-Copyright © 2017 Christian Meter
+Copyright © 2017 - 2019 Christian Meter
 
 Distributed under the [MIT license](https://choosealicense.com/licenses/mit/).
